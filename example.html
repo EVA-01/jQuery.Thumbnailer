@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Thumbnailer</title>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.thumbnailer.min.js"></script>
+<style>
+ #button {
+  background-color:#fafffa;
+  color:#6e746e;
+  font-family:'Open Sans', Tahoma;
+  letter-spacing:1px;
+  text-transform:uppercase;
+ }
+</style>
+<script type="text/javascript">
+ $(document).ready(function() {
+  $('#button').click(function() {
+   $('center img, center #kalos').thumbnailer(200, 200, 'centered'/*, {'background-color':'#030003', 'border-radius':'3px', 'box-shadow':'1px 0px 3px #030003'}*/);
+   $('center span').hover(function() {
+    $(this).stop();
+	$('.thmb-wrapped', this).stop();
+    $('.thmb-wrapped', this).animate({'top':0, 'left':0}, {duration:500, queue:false});
+	$(this).animate({'height':$('.thmb-wrapped', this).first().height(), 'width':$('.thmb-wrapped', this).first().width()}, {duration:500, queue:false});
+   }).mouseout(function() {
+    $(this).stop();
+	$('.thmb-wrapped', this).stop();
+    $(this).animate({'height':$(this).data('height'), 'width':$(this).data('width')}, {duration:500, queue:false});
+	$('.thmb-wrapped', this).animate({top:(0-($('.thmb-wrapped', this).first().height()-$(this).data('height'))/2), left:(0-($('.thmb-wrapped', this).first().width()-$(this).data('width'))/2)}, {duration:500, queue:false});
+   });
+   $('#button').remove();
+  });
+ });
+</script>
+</head>
+<body style="background-color:#aeb4ae">
+<center><button id="button">Thumbnail</button></center>
+<center>
+<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Great_Wave_off_Kanagawa2.jpg/640px-Great_Wave_off_Kanagawa2.jpg">
+<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/b/be/El_coloso.jpg/696px-El_coloso.jpg">
+<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Honor%C3%A9_Daumier_017_%28Don_Quixote%29.jpg/533px-Honor%C3%A9_Daumier_017_%28Don_Quixote%29.jpg">
+<img src="http://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Claude_Monet_-_Waterloo_Bridge%2C_Effet_de_Soleil.jpg/800px-Claude_Monet_-_Waterloo_Bridge%2C_Effet_de_Soleil.jpg">
+<div id="kalos">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+</center>
+</body>
